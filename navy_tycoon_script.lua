@@ -628,7 +628,6 @@ makePanel("Visual", -200, -80, {
 -- Movement panel
 --------------------------------------------------------------------
 makePanel("Movement", 20, -80, {
-    makePanel("Movement", 20, -80, {
     toggleRow("Fly", false, function(s)
         FlyEnabled = s
         if not s then
@@ -838,7 +837,7 @@ end)
 
 --------------------------------------------------------------------
 -- Noclip
---------------------------------------------------------------------
+--------------------------------------------------------------------<
 RunService.Stepped:Connect(function()
     if NoclipEnabled then
         local char = LocalPlayer.Character
