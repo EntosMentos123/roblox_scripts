@@ -12,6 +12,7 @@ local ESPEnabled = false
 local NamesEnabled = false
 local BoxesEnabled = true
 local FlyEnabled = false
+local NoclipEnabled = false
 local ESPColor = Color3.fromRGB(0, 255, 0)
 local NameColor = Color3.fromRGB(0, 255, 0)
 local FlySpeed = 50
@@ -627,6 +628,7 @@ makePanel("Visual", -200, -80, {
 -- Movement panel
 --------------------------------------------------------------------
 makePanel("Movement", 20, -80, {
+    makePanel("Movement", 20, -80, {
     toggleRow("Fly", false, function(s)
         FlyEnabled = s
         if not s then
@@ -642,6 +644,7 @@ makePanel("Movement", 20, -80, {
             if hum then hum.PlatformStand = false end
         end
     end),
+    toggleRow("Noclip", false, function(s) NoclipEnabled = s end), -- ADD THIS
     valueRow("Fly Speed",   FlySpeed,   10,  300, 10, function(v) FlySpeed = v end),
     valueRow("Walk Speed",  WalkSpeed,  16,  100, 2,  function(v)
         WalkSpeed = v
@@ -830,6 +833,21 @@ RunService.RenderStepped:Connect(function()
         if bg then bg:Destroy() end
         if bv then bv:Destroy() end
         if hum then hum.PlatformStand = false end
+    end
+end)
+
+--------------------------------------------------------------------
+-- Noclip
+--------------------------------------------------------------------
+RunService.Stepped:Connect(function()
+    if NoclipEnabled then
+        local char = LocalPlayer.Character
+        if not char then return end
+        for _, part in ipairs(char:GetDescendants()) do
+            if part:IsA("BasePart") and part.CanCollide then
+                part.CanCollide = false
+            end
+        end
     end
 end)
 
