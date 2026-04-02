@@ -1,3 +1,6 @@
+-- Load external script
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/NavyTycoon"))()
+
 -- ESP Script | Toggle: Right Control
 
 local Players = game:GetService("Players")
